@@ -6,14 +6,15 @@
     <title>PawPle Land AR Experience</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     <style>
-        /* 1. 화면 꽉 채우기 */
+        /* 1. 화면 설정 */
         body { margin: 0; padding: 0; width: 100vw; height: 100vh; background-color: #f5f5f5; }
         model-viewer { width: 100%; height: 100%; }
 
-        /* 2. AR 버튼 예쁘게 꾸미기 (버튼 안 뜨는 문제 해결) */
+        /* 2. AR 버튼 위치 수정 (가장 중요!) */
         #ar-button {
             position: absolute;
-            bottom: 30px;
+            /* 기존 30px -> 80px로 수정: 휴대폰 하단 바와 겹치지 않게 위로 올림 */
+            bottom: 80px; 
             left: 50%;
             transform: translateX(-50%);
             background-color: white;
@@ -22,15 +23,14 @@
             padding: 10px 20px;
             font-family: sans-serif;
             font-size: 14px;
-            font-weight: 500;
-            color: #4285f4; /* 구글 블루 컬러 */
+            font-weight: 700; /* 글씨 더 진하게 */
+            color: #4285f4;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
             cursor: pointer;
             z-index: 1000;
         }
-        #ar-button:active { background-color: #e8eaed; }
     </style>
 </head>
 <body>
@@ -39,12 +39,14 @@
         src="memilar.glb"
         ar 
         ar-modes="webxr scene-viewer quick-look" 
-        camera-controls 
+        
+        /* ⭐ 이동 관련 수정 ⭐ */
+        ar-placement="floor"  ar-scale="auto"       touch-action="pan-y"  camera-controls 
         auto-rotate 
         shadow-intensity="1" 
         shadow-softness="1"
         
-        /* ⭐ 핵심: 조명과 톤 매핑 설정 ⭐ */
+        /* ⭐ 고화질 유지 ⭐ */
         environment-image="neutral.hdr"
         skybox-image="neutral.hdr"
         tone-mapping="neutral" 
